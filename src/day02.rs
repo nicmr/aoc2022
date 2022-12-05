@@ -1,9 +1,16 @@
-use std::{error::Error, fs};
+use std::error::Error;
 
 type Result<T> = std::result::Result<T, Box<dyn Error>>;
 
-pub fn part1() -> Result<i32> {
-    let input = fs::read_to_string("day02.input")?;
+#[test]
+pub fn day02() -> Result<()> {
+    let input = std::fs::read_to_string("day02.input")?;
+    println!("part1: {}", part1(&input)?);
+    println!("part2: {}", part2(&input)?);
+    Ok(())
+}
+
+pub fn part1(input: &str) -> Result<i32> {
     let lines: Vec<_> = input.lines().collect();
     let sum = lines
         .iter()
@@ -13,8 +20,7 @@ pub fn part1() -> Result<i32> {
     Ok(sum)
 }
 
-pub fn part2() -> Result<i32> {
-    let input = fs::read_to_string("day02.input")?;
+pub fn part2(input: &str) -> Result<i32> {
     let lines: Vec<_> = input.lines().collect();
     let sum = lines
         .iter()
@@ -74,10 +80,6 @@ struct Match {
 }
 
 impl Match {
-    fn new(player: Move, enemy: Move) -> Self {
-        Self { player, enemy }
-    }
-
     fn from_enemy_and_result(enemy: Move, desired_result: MatchResult) -> Self {
         let player = match (enemy, desired_result) {
             (Move::Rock, MatchResult::Win) => Move::Paper,
