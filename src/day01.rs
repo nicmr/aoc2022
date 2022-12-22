@@ -1,6 +1,4 @@
-use std::error::Error;
-
-type Result<T> = std::result::Result<T, Box<dyn Error>>;
+use crate::Result;
 
 #[test]
 fn day01() -> Result<()> {

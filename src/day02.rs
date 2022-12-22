@@ -1,6 +1,4 @@
-use std::error::Error;
-
-type Result<T> = std::result::Result<T, Box<dyn Error>>;
+use crate::Result;
 
 #[test]
 pub fn day02() -> Result<()> {
@@ -94,7 +92,7 @@ impl Match {
     }
 
     fn try_from_str(s: &str) -> Result<Self> {
-        let enemy_char: char = s.chars().nth(0).unwrap();
+        let enemy_char: char = s.chars().next().unwrap();
         // .ok_or(Err("Failed to find 0th element in line".into()))?;
         let enemy_move = Move::try_from_char_enemy(enemy_char)?;
 
@@ -108,7 +106,7 @@ impl Match {
     }
 
     fn try_from_str_part2(s: &str) -> Result<Self> {
-        let enemy_char = s.chars().nth(0).unwrap();
+        let enemy_char = s.chars().next().unwrap();
         let enemy_move = Move::try_from_char_enemy(enemy_char)?;
         let desired_result_char = s.chars().nth(2).unwrap();
         let desired_result = MatchResult::try_from_char(desired_result_char)?;

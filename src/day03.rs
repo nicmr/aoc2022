@@ -1,6 +1,5 @@
-use std::{collections::HashSet, error::Error};
-
-type Result<T> = std::result::Result<T, Box<dyn Error>>;
+use std::collections::HashSet;
+use crate::Result;
 
 #[test]
 pub fn day03() -> Result<()> {
@@ -15,7 +14,7 @@ pub fn part1(input: &str) -> Result<u32> {
     let sum = lines
         .iter()
         .map(|line| char_in_both_halves(line).unwrap())
-        .map(|c| to_prio(c))
+        .map(to_prio)
         .sum();
     Ok(sum)
 }
@@ -53,7 +52,7 @@ fn triplet_fold((mut collected_lines, mut common_chars) : (Vec<String>, Vec<char
         let merged_set: HashSet<char> = sets
             .into_iter()
             .reduce(|set1, set2| {
-                let intersection: HashSet<char> = set1.intersection(&set2).map(|c| *c).collect();
+                let intersection: HashSet<char> = set1.intersection(&set2).cloned().collect();
                 intersection
             })
             .unwrap();
