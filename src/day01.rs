@@ -4,7 +4,7 @@ type Result<T> = std::result::Result<T, Box<dyn Error>>;
 
 #[test]
 fn day01() -> Result<()> {
-    let input = std::fs::read_to_string("day01.input")?;
+    let input = std::fs::read_to_string("input/day01.input")?;
     println!("part1: {}", part1(&input)?);
     println!("part2: {}", part2(&input)?);
     Ok(())
